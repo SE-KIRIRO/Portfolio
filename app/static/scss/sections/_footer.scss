@@ -1,0 +1,23 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+
+
+.myfooter{
+    background-color: $gray-800;
+    padding: 0.6rem 0.3rem;
+    width: 100%;
+
+    p{
+        color: $white;
+
+        a{
+            color: $white;
+            text-decoration: none;
+
+            &:hover{
+                color: $blue;
+                text-decoration: underline;
+            }
+        }
+    }
+}

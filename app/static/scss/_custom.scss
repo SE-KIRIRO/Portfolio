@@ -1,0 +1,24 @@
+//my theme colors
+$my_brown-1: #372C2E;
+$my_brown-2: #563727;
+$my_brown-3: #7A431D;
+
+// white and gray colors
+$white:    #fff ;
+$gray-100: #f8f9fa ;
+$gray-200: #e9ecef ;
+$gray-300: #dee2e6 ;
+$gray-400: #ced4da ;
+$gray-500: #adb5bd ;
+$gray-600: #6c757d ;
+$gray-700: #495057 ;
+$gray-800: #343a40 ;
+$gray-900: #212529 ;
+$black:    #000 ;
+
+$primary: $my_brown-1;
+$secondary: $my_brown-2;
+$auxiliary: $my_brown-3;
+
+// import bootsrap 5
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

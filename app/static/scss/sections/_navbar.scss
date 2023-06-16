@@ -1,0 +1,46 @@
+@use '../custom' as *;
+@use '../components/mixins' as *;
+
+#lawrence-logo{
+    height: 50px;
+    width: 211px;
+}
+
+.menu {
+    @include gradientTwo;
+
+    li{
+        padding: 0 0.7rem;
+
+        a{
+            color: $white !important;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+    }
+}
+
+.social-media{
+    @include gradientOne;
+
+    padding: 0.4rem;
+   // border-bottom: 1px solid rgba($secondary, 0.95);
+
+    a{
+        color: $white;
+
+        
+        &:hover{
+            color: $black;
+            transform: scale(1.5);
+        }
+        
+
+        @include media-breakpoint-up(sm){
+            i{
+                font-size: 1.6rem;
+
+            }
+        }
+    }
+}

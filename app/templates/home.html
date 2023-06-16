@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<section id="home" class="intro-section">
+    <div class="container">
+        <div class="row align-items-center text-white">
+            <div class="col-md-6 intros">
+                <h1 class="display-2">
+                    <span class="display-2--intro">
+                        Hey!, I'm Lawrence
+                    </span>
+                    <span class="display-2--description lh-base">
+                        I am a software engineer based in Nairobi,
+                        Kenya. I specialize in building exceptional
+                        API's with various Python Frameworks, the occasional
+                        full web app like this one &#128526;.<br>
+                        Also, a future golang expert &#128524;.
+                    </span>
+                </h1>
+                <button type="button" class="rounded-pill btn-rounded">Get in Touch
+                    <span><i class="fas fa-arrow-right"></i></span>
+                </button>
+            </div>
+            <div class="col-md-6 intros">
+                <div class="container text-center">
+                    <div class="row m-2">
+                        <div class="col p-4">
+                            <img src="{{ url_for('static', filename='assets/images/frameworks/flask.png') }}" title="framework-logo" alt="framework-logo" class="img-fluid">
+                        </div>
+                        <div class="col p-4">
+                            <img src="{{ url_for('static', filename='assets/images/frameworks/django.png') }}" title="framework-logo" alt="framework-logo" class="img-fluid">
+                        </div>
+                    
+                        <div class="col p-4">
+                            <img src="{{ url_for('static', filename='assets/images/frameworks/fastapi.png') }}" title="framework-logo" alt="framework-logo" class="img-fluid">
+                        </div>
+                        <div class="col p-4">
+                            <img src="{{ url_for('static', filename='assets/images/frameworks/go.png') }}" title="framework-logo" alt="framework-logo" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+<!--<a href="https://iconscout.com/icons/django" target="_blank">Free Django Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>-->
+<!--<a href="https://iconscout.com/icons/flask" target="_blank">Free Flask Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>-->
+<!--<a href="https://iconscout.com/icons/go" target="_blank">Free Go Icon</a> by <a href="https://iconscout.com/contributors/icon-mafia" target="_blank">Icon Mafia</a>-->

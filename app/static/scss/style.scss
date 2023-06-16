@@ -1,0 +1,15 @@
+@use 'custom';
+
+// import components
+
+@use './components/aninations';
+@use './components/buttons';
+@use './components/mixins';
+@use './components/typography';
+
+// import sections
+
+@use './sections/footer';
+@use './sections/navbar';
+@use './sections/intro-home';
+@use './sections/projects';
