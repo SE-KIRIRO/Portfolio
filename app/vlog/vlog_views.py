@@ -3,4 +3,4 @@ from . import vlog
 
 @vlog.route("/vlog")
 def vlog():
-    return render_template('vlog.html')
+    return render_template('vlog/vlog.html')

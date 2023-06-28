@@ -3,11 +3,11 @@ from . import main
 
 @main.route("/")
 def index():
-    return render_template("home.html")
+    return render_template("home/home.html")
 
 @main.route("/home")
 def home():
-    return render_template('home.html')
+    return render_template('home/home.html')
 
 @main.route("/theming")
 def theme_stuff():

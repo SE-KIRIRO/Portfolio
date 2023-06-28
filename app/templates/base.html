@@ -1,3 +1,4 @@
+{% import 'bootstrap/wtf.html' as wtf %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,6 +14,8 @@
         <meta name="publisher" content="Lawrence Mbugua Mugwe">
         <meta name="author" content="Lawrence Mbugua Mugwe">
         <title>Lawrence Mbugua - &quot;Portfolio website, blog and vlog; all in one&quot;</title>
+        <link rel="icon" href="{{ url_for('static', filename='assets/images/title_icon.jpg')}}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/title_icon.jpg')}}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,7 +24,7 @@
     </head>
     <body>
         <!--start the navbar section-->
-        <section class="fixed-top shadow">
+        <section class="sticky-top shadow">
             <nav class="navbar navbar-dark navbar-expand-lg menu  ">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url_for('main.index') }}">
@@ -36,17 +39,19 @@
                                 <a class="nav-link active" aria-current="page" href="{{ url_for('main.home') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('projects.projects') }}">Projects</a>
+                                <a class="nav-link" href="{{ url_for('projects.projects_index') }}">Projects</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('blog.blog') }}">Blog</a>
+                                <a class="nav-link" href="{{ url_for('blog.blog_index') }}">Blog</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url_for('vlog.vlog') }}">Vlog</a>
                             </li>
+                            {% if current_user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#" >Contact</a>
+                                <a class="nav-link" href="{{ url_for('auth.logout') }}" >Log Out</a>
                             </li>
+                            {% endif %}
                         </ul>
                         <button type="button" class="rounded-pill btn-rounded">+254 778708580
                             <span><i class="fas fa-phone-alt"></i></span>
@@ -59,23 +64,37 @@
                 <div class="container text-center ">
                     <div class="row">
                         <div class="col">
-                            <a href="#"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/SE-KIRIRO" target="_blank"><i class="fab fa-github"></i></a>
                         </div>
                         <div class="col">
-                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.linkedin.com/in/lawrence-mugwe-b16aaa23a/" target="_blank"><i class="fab fa-linkedin"></i></a>
                         </div>
                         <div class="col">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="https://twitter.com/LawrenceMugwe" target="_blank"><i class="fab fa-twitter"></i></a>
                         </div>
                         <div class="col">
                             <a href="#"><i class="fab fa-facebook"></i></a>
                         </div>
                         <div class="col">
-                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.instagram.com/mbugua_mugwe/" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
+                <div class="container  text-center d-flex align-items-center justify-content-center" id="div_flash">
+                {% with messages = get_flashed_messages(with_categories=true)%}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} col-md-7 m-0">
+                                {{ message }}
+                                <input type="button" value="&times;" onclick="removeFlash()" style="float: right; border: none; background: transparent; color:black;">
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                </div>
             </section>
+        
+            
         </section>
         {% block page_content %}
         {% endblock %}
@@ -85,9 +104,21 @@
                 <p>&copy; Copyright 2023 <a href="#">Software Development</a> | Created by <a href="#">Lawrence</a>.</p>
             </div>
         </footer>
+        <a href="{{ url_for('auth.login') }}" class="shadow btn btn-primary rounded-circle back-to-top">
+            <i class="fas fa-wrench"></i>
+        </a>
+
 
 
 
         <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.js') }}"></script>
+        <script>
+        function removeFlash() {
+        const element = document.getElementById('div_flash');
+        element.remove();
+        }
+        </script>
+        {{ moment.include_moment() }}
+        {{ pagedown.include_pagedown() }}
     </body>
 </html>

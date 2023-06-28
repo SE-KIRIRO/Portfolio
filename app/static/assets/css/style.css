@@ -12012,6 +12012,21 @@ textarea.form-control-lg {
   text-transform: none;
 }
 
+.display-3 {
+  font-family: "Noto Sans", sans-serif;
+}
+.display-3--title {
+  font-size: 1.8rem;
+  text-transform: capitalize;
+  font-weight: 600;
+  font-family: "Noto Sans", sans-serif;
+  display: inline-block;
+  background-image: linear-gradient(to right, #563727, #7A431D);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .myfooter {
   background-color: #343a40;
   padding: 0.6rem 0.3rem;
@@ -12029,9 +12044,30 @@ textarea.form-control-lg {
   text-decoration: underline;
 }
 
+.back-to-top {
+  position: fixed;
+  width: 3rem;
+  height: 3rem;
+  right: 1.875rem;
+  bottom: 1.875rem;
+  z-index: 9999;
+}
+.back-to-top i {
+  color: #fff;
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 575.98px) {
+  .back-to-top {
+    display: none;
+  }
+}
+
 #lawrence-logo {
   height: 50px;
-  width: 211px;
 }
 
 .menu {
@@ -12063,12 +12099,81 @@ textarea.form-control-lg {
   }
 }
 
+#div_flash {
+  background-color: transparent;
+}
+
 .intro-section {
   background: linear-gradient(to right, rgba(86, 55, 39, 0.95), rgba(122, 67, 29, 0.95));
-  padding: 10rem 0 0 0;
+  padding: 1rem 0 0 0;
   width: 100%;
   height: 100%;
   padding-bottom: 10rem;
+}
+
+.portfolio {
+  padding: 4rem 0;
+}
+.portfolio button {
+  text-transform: capitalize;
+}
+
+.portfolio-box {
+  position: relative;
+  width: 100%;
+  height: 18.5rem;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  border-top: 0.5rem solid #7A431D;
+  border-radius: 10px;
+}
+.portfolio-box img {
+  height: 100%;
+  padding: 4rem;
+  margin-left: 2rem;
+  align-self: center;
+}
+.portfolio-box .portfolio-info {
+  background-color: rgba(86, 55, 39, 0.85);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.portfolio-box .portfolio-info .caption {
+  text-align: center;
+  color: #fff;
+}
+.portfolio-box .portfolio-info .caption h4 {
+  text-transform: uppercase;
+  display: block;
+}
+.portfolio-box:hover img {
+  transform: scale(1.5);
+  transition-duration: 1000ms;
+  transition-property: all;
+}
+.portfolio-box:hover .portfolio-info {
+  opacity: 1;
+  visibility: visible;
+  transition-duration: 1000ms;
+  transition-property: all;
+}
+
+.services {
+  position: relative;
+  padding: 1rem 0;
+}
+.services--content {
+  padding: 1rem;
+  margin-top: 1.5 rem;
+}
+.services--content .icon {
+  font-size: 2.5rem;
+  color: #7A431D;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as macros %}
+
+{% block page_content %}
+{% if current_user.is_authenticated %}
+{% if (current_user.is_blogger() or current_user.is_admin()) %}
+<!-- Button trigger modal -->
+<div class="container">
+    <button type="button" class="btn btn-outline-auxiliary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Publish Project
+    </button>
+
+    <!-- Modal -->
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Publish Project</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.title.label( class="form-control-label") }}
+                                {% if form.title.errors %}
+                                    {{ form.title(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.title(class="form-control") }}
+                                {% endif %}
+                                
+                            </div>
+
+                            <div class="form-group">
+                                {{ form.body.label( class="form-control-label") }}
+                                {% if form.body.errors %}
+                                    {{ form.body(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.body.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.body(class="form-control") }}
+                                {% endif %}
+                                
+                            </div>
+                            <div class="form-group">
+                                {{ form.framework_pic.label() }}
+                                {{ form.framework_pic(class="form-control-file") }}
+                                {% if form.framework_pic.errors %}
+                                    {% for error in form.framework_pic.errors %}
+                                        <span class="text-danger">{{ error }}</span><br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            
+                        </fieldset>
+                        <div class="form-group mt-3">
+                            {{ form.submit(class="btn btn-outline-auxiliary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-auxiliary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endif %}
+
+<section id="portfolio" class="portfolio">
+    <div class="container">
+        <div class="row text-center">
+            <h1 class="display-3 fw-bold text-capitalize">Latest work</h1>
+            <div class="heading-line"></div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
+        </div>
+        <!--
+        <div class="row text-center mt-3 mb-3">
+            <div class="col-md-12">
+                <button class="btn btn-outline-auxiliary" type="button">flask</button>
+                <button class="btn btn-outline-auxiliary" type="button">django</button>
+                <button class="btn btn-outline-auxiliary" type="button">fastapi</button>
+                <button class="btn btn-outline-auxiliary" type="button">golang</button>
+            </div>
+        </div>
+        -->
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-lg-4 col-md-6">
+                <div class="portfolio-box shadow">
+                    <img src="{{ url_for('static', filename='assets/images/project_background/' + project.image_file) }}" class="img-fluid" alt="frameword pic">
+                    <div class="portfolio-info">
+                        <div class="caption">
+                            <h4>{{ project.title }}</h4>
+                            <hr>
+                            {% if project.body_html %}
+                                {{ project.body_html | safe }}
+                            {% else %}
+                                {{ project.body }}
+                            {% endif %}
+                            <p><small>{{ moment(project.timestamp).fromNow() }}</small></p>
+                            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                                
+                                <a href="{{ url_for('projects.view_project_blog', id = project.id) }}">
+                                    <button type="button" class="btn btn-outline-light">Blog</button>
+                                </a>
+                                {% if (current_user.is_blogger() or current_user.is_admin()) %}
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_blog', id=project.id) }}">Add blog</a></li>
+                                    <li><a class="dropdown-item text-warning" href="{{ url_for('projects.edit_project', id = project.id)}}">Edit project</a></li>
+                                    <li><a class="dropdown-item text-danger" href="{{ url_for('projects.delete_project', id = project.id) }}">Delete project</a></li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <div class="container">
+            {{ macros.pagination_widget(pagination, 'projects.projects_index')}}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

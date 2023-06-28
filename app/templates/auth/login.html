@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+<div class="container pb-4 col-md-6 mb-4">
+    
+    {% if current_user.is_anonymous %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Login</legend>
+            <div class="form-floating mb-3">
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control", id="floatingInput") }}
+                {% endif %}
+                {{ form.email.label( for="floatingInput") }}
+            </div>
+            
+            <div class="form-floating mb-3">
+                {% if form.password.errors %}
+                    {{ form.password(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.password(class="form-control", id="floatingInput") }}
+                {% endif %}
+                {{ form.password.label(for="floatingInput") }}
+            </div>
+            <div class="form-group">
+                
+                {{ form.remember_me(type="checkbox", class="btn-check", id="btn-check", autocomplete="off")}}
+                {{ form.remember_me.label(class="btn btn-outline-auxiliary", for="btn-check")}}
+                
+            </div>
+        </fieldset>
+        <div class="form-group mt-3">
+            {{ form.submit(class="btn btn-outline-auxiliary") }}
+        </div>
+    </form>
+    {% endif %}
+    <div class="btn-group mt-3" role="group" aria-label="Button group with nested dropdown">
+        {% if current_user.is_anonymous %}
+        <a href="{{ url_for('auth.register') }}" class="btn btn-outline-auxiliary">Register</a>        
+        <a href="{{ url_for('auth.password_reset_request') }}" class="btn btn-outline-auxiliary">Reset_password</a>
+        {% endif %}
+
+
+        {% if current_user.is_authenticated %}
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            More Options
+            </button>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('auth.change_password') }}">Change Password</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

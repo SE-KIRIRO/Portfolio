@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% import '_macros.html' as macros %}
+
+
+{% block page_content %}
+{% if current_user.is_blogger() %}
+<section class="mb-5 mt-3 pb-4">
+    <div class="container pb-4">
+    <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-auxiliary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Post a Blog
+        </button>
+
+    <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Post a Blog</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <div class="form-group">
+                            {{ form.title.label( class="form-control-label") }}
+                            {% if form.title.errors %}
+                                {{ form.title(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.title.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.title(class="form-control") }}
+                            {% endif %}
+                            
+                        </div>                  
+
+                        <div class="form-group">
+                            {{ form.body.label( class="form-control-label") }}
+                            {% if form.body.errors %}
+                                {{ form.body(class="form-control is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.body.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.body(class="form-control") }}
+                            {% endif %}
+                            
+                        </div>
+                        
+                    </fieldset>
+                    <div class="form-group mt-3">
+                        {{ form.submit(class="btn btn-outline-auxiliary") }}
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-auxiliary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+{% endif %}
+    <div class="container">
+        {% include '_posts.html' %}
+    </div>
+    <div class="container">
+        {{ macros.pagination_widget(pagination, 'blog.blog_index')}}
+    </div>
+</section>
+
+{% endblock %}
