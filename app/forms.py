@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from flask_wtf.file import FileField, FileAllowed
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, SubmitField, PasswordField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp
 from wtforms import ValidationError
@@ -83,10 +83,22 @@ class BlogPostForm(FlaskForm):
 class ProjectForm(FlaskForm):
     title = StringField('project title', validators=[DataRequired()])
     body = PageDownField("a short description", validators=[DataRequired()])
-    framework_pic = FileField('upload framework logo', validators= [ FileAllowed(['jpg', 'png'])])
+    framework_pic = FileField('upload framework logo', validators= [ FileAllowed(['jpg', 'png', 'jpeg']), DataRequired()])
     submit = SubmitField("publish")
 
 class EditProjectForm(FlaskForm):
     title = StringField('project title', validators=[DataRequired()])
     body = PageDownField('a short description ', validators=[DataRequired()])
     submit= SubmitField("submit changes")
+
+
+class VideoForm(FlaskForm):
+    title = StringField("video title", validators=[DataRequired()])
+    thumbnail = FileField("upload video thumbnail", validators=[FileAllowed(['jpg', 'png', 'jpeg']), DataRequired()])
+    link = StringField('video link', validators=[DataRequired()])
+    submit = SubmitField("publish video")
+
+class PictureForm(FlaskForm):
+    title = StringField("picture title", validators=[DataRequired()])
+    picture = FileField("upload a picture", validators=[FileAllowed(['jpg', 'png', 'jpeg']), DataRequired()])
+    submit = SubmitField("publish picture")

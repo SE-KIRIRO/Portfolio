@@ -1,0 +1,50 @@
+{% for video in videos %}
+<div class="col-lg-4 col-md-6 intros">
+            
+    <div class="video-preview">
+        <div class="thumbnail-row">
+            <div class="video-box">
+                <img src="{{ url_for('static', filename='assets/images/video_thumbnail/' + video.thumbnail_file) }}" alt="thumbnail" class="img-fluid ">
+                <a href="{{ video.video_link }}" class="glightbox">
+                    <span>
+                        <i class="fas fa-play-circle"></i>
+                    </span>
+                    <span class="border-animation border-animation--border-1"></span>
+                    <span class="border-animation border-animation--border-2"></span>
+                </a>
+            </div>
+        </div>
+        <div class="video-info-grid">
+            <div class="channel-pic">
+                <img class="profile-pic" src="{{ url_for('static', filename='assets/images/title_icon.jpg') }}">
+            </div>
+            <div class="video-info">
+                <p class="video-title">
+                    {{ video.title }}
+                </p>
+                <p class="video-author">
+                    {{ video.vlogger.username }}
+                </p>
+                <p class="video-stats">
+                    {% if video.project_video %}
+                        <i class="fa-solid fa-code" style="font-size: 2rem;"></i>
+                    {% endif %}
+                    {% if not video.project_video %}
+                        <i class="fa-brands fa-pied-piper-alt" style="font-size: 2rem;"></i>
+                    {% endif %}
+                    &#183; 
+                    {{ moment(video.timestamp).fromNow() }} &#183;
+                    {% if (current_user.is_blogger() or current_user.is_admin()) %}
+                    &#183;
+                    <a href="{{ url_for('vlog.delete_vlog', id=video.id)}}">
+                        <i class="fa-regular fa-trash-can text-danger" style="font-size: 1.5rem;"></i>
+                    </a>
+                    {% endif %}
+                </p>
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+{% endfor %}

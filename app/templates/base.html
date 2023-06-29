@@ -21,6 +21,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendors/css/glightbox.min.css' )}}">
     </head>
     <body>
         <!--start the navbar section-->
@@ -45,7 +46,7 @@
                                 <a class="nav-link" href="{{ url_for('blog.blog_index') }}">Blog</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('vlog.vlog') }}">Vlog</a>
+                                <a class="nav-link" href="{{ url_for('vlog.vlog_index') }}">Vlog</a>
                             </li>
                             {% if current_user.is_authenticated %}
                             <li class="nav-item">
@@ -98,6 +99,8 @@
         </section>
         {% block page_content %}
         {% endblock %}
+        {% block base_svg %}
+        {% endblock %}
 
         <footer class="myfooter fixed-bottom">
             <div class="container text-center">
@@ -110,7 +113,15 @@
 
 
 
-
+        <script src="{{ url_for('static', filename='assets/vendors/js/glightbox.min.js')}}"></script>
+        <script type="text/javascript">
+            const lightbox = GLightbox({
+                'type':'video',
+                'source': 'youtube',
+                'width': 900,
+                'autoPlayVideos':'true',
+            })
+        </script>
         <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.js') }}"></script>
         <script>
         function removeFlash() {

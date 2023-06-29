@@ -11952,6 +11952,16 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@keyframes pulse-border {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
 .btn-rounded {
   position: relative;
   padding: 0.9375rem 4.373rem 0.9375rem 1.2rem;
@@ -12025,6 +12035,26 @@ textarea.form-control-lg {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.heading-line::before {
+  content: "";
+  width: 10rem;
+  height: 0.1rem;
+  display: block;
+  background-color: #7A431D;
+  margin: 0 auto;
+}
+
+.heading-line::after {
+  content: "";
+  width: 2rem;
+  padding-top: 0.5rem;
+  height: 0.2rem;
+  display: block;
+  background-color: #7A431D;
+  margin: 0 auto;
+  margin-bottom: 1rem;
 }
 
 .myfooter {
@@ -12174,6 +12204,86 @@ textarea.form-control-lg {
 .services--content .icon {
   font-size: 2.5rem;
   color: #7A431D;
+}
+
+.intros .video-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.intros .video-box img {
+  height: 14rem;
+  align-self: center;
+}
+.intros .video-box a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.intros .video-box a span i {
+  font-size: 6rem;
+  color: #563727;
+}
+
+.border-animation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  height: 6rem;
+  border: 0.55rem solid #fff;
+  border-radius: 50%;
+}
+.border-animation:hover {
+  animation: pulse-border 1.5s linear infinite;
+}
+.border-animation:hover--border-1 {
+  animation-delay: 1s;
+}
+.border-animation:hover--border-2 {
+  animation-delay: 1.5s;
+}
+
+.video-title {
+  margin-top: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+
+.profile-pic {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.thumbnail-row {
+  margin-bottom: 14px;
+}
+
+.video-author {
+  font-size: 12px;
+  color: #7A431D;
+  margin-bottom: 4px;
+}
+
+.video-stats {
+  font-size: 12px;
+  color: #7A431D;
+}
+
+.video-info-grid {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  padding: 1rem;
+}
+
+.video-preview {
+  border: 1px solid #7A431D;
+  border-radius: 7px;
+  margin-bottom: 2rem;
 }
 
 /*# sourceMappingURL=style.css.map */

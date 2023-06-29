@@ -26,7 +26,7 @@ def get_image(image_file):
 @projects.route("/projects", methods=['GET', 'POST'])
 def projects_index():
     form = ProjectForm()
-    if current_user.is_blogger and form.validate_on_submit():
+    if current_user.is_blogger() and form.validate_on_submit():
         picture_file = save_picture(form.framework_pic.data)
         project = Project(title=form.title.data,
                           body=form.body.data,

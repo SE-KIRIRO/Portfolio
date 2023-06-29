@@ -87,7 +87,7 @@
         <div class="row text-center">
             <h1 class="display-3 fw-bold text-capitalize">Latest work</h1>
             <div class="heading-line"></div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <p>Hover for more detail
             </p>
         </div>
         <!--
@@ -126,10 +126,11 @@
                                     <i class="fas fa-arrow-right"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_blog', id=project.id) }}">Add blog</a></li>
-                                    <li><a class="dropdown-item text-warning" href="{{ url_for('projects.edit_project', id = project.id)}}">Edit project</a></li>
-                                    <li><a class="dropdown-item text-danger" href="{{ url_for('projects.delete_project', id = project.id) }}">Delete project</a></li>
+                                        <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_blog', id=project.id) }}">Add blog</a></li>
+                                        <li><a class="dropdown-item text-warning" href="{{ url_for('projects.edit_project', id = project.id)}}">Edit project</a></li>
+                                        <li><a class="dropdown-item text-danger" href="{{ url_for('projects.delete_project', id = project.id) }}">Delete project</a></li>
                                     </ul>
+                                    
                                 </div>
                                 {% endif %}
                             </div>

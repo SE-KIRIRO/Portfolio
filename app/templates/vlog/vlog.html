@@ -1,7 +1,105 @@
 {% extends 'base.html' %}
+{% import '_macros.html' as macros %}
 
 {% block page_content %}
-<div class="container">
-    <h4>this is the vlog page</h4>
+
+{% if current_user.is_authenticated %}
+{% if (current_user.is_blogger() or current_user.is_admin()) %}
+<!-- Button trigger modal -->
+<div class="container mt-3">
+    <button type="button" class="btn btn-outline-auxiliary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Publish Video
+    </button>
+
+    <!-- Modal -->
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Publish Video</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                {{ form.title.label( class="form-control-label") }}
+                                {% if form.title.errors %}
+                                    {{ form.title(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.title.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.title(class="form-control") }}
+                                {% endif %}
+                                
+                            </div>
+                            
+
+                            <div class="form-group">
+                                {{ form.link.label( class="form-control-label") }}
+                                {% if form.link.errors %}
+                                    {{ form.link(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.link.errors %}
+                                            <span>{{ error }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.link(class="form-control") }}
+                                {% endif %}
+                                
+                            </div>
+                            <div class="form-group">
+                                {{ form.thumbnail.label() }}
+                                {{ form.thumbnail(class="form-control-file") }}
+                                {% if form.thumbnail.errors %}
+                                    {% for error in form.thumbnail.errors %}
+                                        <span class="text-danger">{{ error }}</span><br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            
+                            
+                        </fieldset>
+                        <div class="form-group mt-3">
+                            {{ form.submit(class="btn btn-outline-auxiliary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-auxiliary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
 </div>
+
+{% endif %}
+{% endif %}
+<section id="my-video" class="my-video  mt-3  container mb-5 pb-4">
+    <div class="container">
+        <div class="row text-center">
+            <h1 class=" text-capitalize">project vlogs &#183; etc</h1>
+            <div class="heading-line"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        {% include '_videos.html' %}
+    </div>
+    <div class="container">
+            {{ macros.pagination_widget(pagination, 'vlog.vlog_index')}}
+    </div>
+    
+</section>
+
+
 {% endblock %}

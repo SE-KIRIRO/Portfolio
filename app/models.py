@@ -73,6 +73,8 @@ class User(db.Model, UserMixin):
     about_me = db.Column(db.Text())
     posts = db.relationship('BlogPost', backref='author', lazy='dynamic')
     projects = db.relationship('Project', backref='developer', lazy='dynamic')
+    video = db.relationship("Video", backref='vlogger', lazy='dynamic')
+    picture = db.relationship('Picture', backref='picman', lazy='dynamic')
     def __init__(self, **kwargs):
         super(User, self).__init__(**kwargs)
         if self.role is None:
@@ -177,6 +179,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
     
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
@@ -185,6 +188,12 @@ class AnonymousUser(AnonymousUserMixin):
         return False
     def is_blogger(self):
         return False
+    
+login_manager.anonymous_user = AnonymousUser
+    
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 class BlogPost(db.Model):
@@ -207,6 +216,7 @@ class BlogPost(db.Model):
             markdown(value, output_format='html'),
             tags=allowed_tags, strip=True
         ))
+db.event.listen(BlogPost.body, 'set', BlogPost.on_changed_body)
 
 class Project(db.Model):
     __tablename__ = "projects"
@@ -217,6 +227,8 @@ class Project(db.Model):
     developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     image_file = db.Column(db.String(64), nullable=False)
     blog = db.relationship('BlogPost', backref='project_blog', lazy='dynamic')
+    video = db.relationship('Video', backref='project_video', lazy='dynamic')
+    picture = db.relationship('Picture', backref='project_pic', lazy='dynamic')
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     @staticmethod
@@ -230,11 +242,25 @@ class Project(db.Model):
             tags=allowed_tags, strip=True
         ))
 
-db.event.listen(BlogPost.body, 'set', BlogPost.on_changed_body)
+
 db.event.listen(Project.body, 'set', Project.on_changed_body)
 
-login_manager.anonymous_user = AnonymousUser
-    
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+
+class Video(db.Model):
+    __tablename__ = "videos"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64), nullable=False)
+    thumbnail_file = db.Column(db.String(64), nullable=False)
+    video_link = db.Column(db.String(128), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+
+class Picture(db.Model):
+    __tablename__ = 'pictures'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128), nullable=False)
+    picture_file = db.Column(db.String(128), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
+    developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
