@@ -120,13 +120,21 @@
                                 <a href="{{ url_for('projects.view_project_blog', id = project.id) }}">
                                     <button type="button" class="btn btn-outline-light">Blog</button>
                                 </a>
+                                <a href="{{ url_for('projects.view_project_vlog', id = project.id) }}">
+                                    <button type="button" class="btn btn-outline-light">Vlog</button>
+                                </a>
+                                <a href="{{ url_for('projects.view_project_pic', id = project.id) }}" target="_blank">
+                                    <button type="button" class="btn btn-outline-light">ER-diagram</button>
+                                </a>
                                 {% if (current_user.is_blogger() or current_user.is_admin()) %}
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-arrow-right"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_blog', id=project.id) }}">Add blog</a></li>
+                                        <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_blog', id=project.id) }}"  >Add blog</a></li>
+                                        <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_vlog', id=project.id) }}">Add vlog</a></li>
+                                        <li><a class="dropdown-item text-info" href="{{ url_for('projects.add_project_pic', id=project.id) }}" >Add pic</a></li>
                                         <li><a class="dropdown-item text-warning" href="{{ url_for('projects.edit_project', id = project.id)}}">Edit project</a></li>
                                         <li><a class="dropdown-item text-danger" href="{{ url_for('projects.delete_project', id = project.id) }}">Delete project</a></li>
                                     </ul>

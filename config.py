@@ -17,6 +17,7 @@ class Config:
     PROJECTS_PER_PAGE = os.environ.get('PROJECTS_PER_PAGE')
     BASEDIR = basedir
     VIDEO_PER_PAGE=os.environ.get('VIDEO_PER_PAGE')
+    PORTFOLIO_BLOGGER=os.environ.get('PORTFOLIO_BLOGGER')
 
     @staticmethod
     def init_app(app):

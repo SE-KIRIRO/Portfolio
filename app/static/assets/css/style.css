@@ -12058,12 +12058,14 @@ textarea.form-control-lg {
 }
 
 .myfooter {
-  background-color: #343a40;
+  background-color: #212529;
   padding: 0.6rem 0.3rem;
   width: 100%;
 }
 .myfooter p {
   color: #fff;
+  font-style: italic;
+  font-size: 11px;
 }
 .myfooter p a {
   color: #fff;
@@ -12215,6 +12217,7 @@ textarea.form-control-lg {
 .intros .video-box img {
   height: 14rem;
   align-self: center;
+  border-radius: 6px;
 }
 .intros .video-box a {
   position: absolute;

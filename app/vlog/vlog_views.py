@@ -18,6 +18,12 @@ def save_picture1(thumbnail):
 
     return picture_fn
 
+def delete_picture1(picture_fn):
+    basedir = current_app.config['BASEDIR']
+    picture_path = os.path.join(basedir, 'app', 'static/assets/images/video_thumbnail', picture_fn)
+    os.remove(picture_path)
+
+
 @vlog.route("/vlog", methods=['GET', 'POST'])
 def vlog_index():
     form = VideoForm()
@@ -40,9 +46,12 @@ def vlog_index():
                            pagination=pagination)
 
 @vlog.route('/delete_vlog<int:id>')
+@login_required
+@blogger_required
 def delete_vlog(id):
     video = Video.query.get_or_404(id)
     if current_user.is_blogger() or current_user.is_admin():
+        delete_picture1(video.thumbnail_file)
         db.session.delete(video)
         db.session.commit()
         flash('video deleted', category='info')

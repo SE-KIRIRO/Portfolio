@@ -3,12 +3,14 @@
 
 
 .myfooter{
-    background-color: $gray-800;
+    background-color: $gray-900;
     padding: 0.6rem 0.3rem;
     width: 100%;
 
     p{
         color: $white;
+        font-style: italic;
+        font-size: 11px;
 
         a{
             color: $white;

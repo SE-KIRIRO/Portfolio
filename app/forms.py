@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, Regexp
 from wtforms import ValidationError
 from .models import User
 from flask_pagedown.fields import PageDownField
+from flask import current_app
 
 
 class NameForm(FlaskForm):
@@ -36,6 +37,8 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError("Email already registered.")
+        if (field.data != current_app.config['PORTFOLIO_BLOGGER'] or field.data != current_app.config['PORTFOLIO_ADMIN']):
+            raise ValidationError("Invalid Email")
     def validate_username(self, field):
         if User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use') 

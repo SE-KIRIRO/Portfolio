@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
 {% block page_content %}
 <div class="container">
-    <form method="POST" action="">
+    <form method="POST" action="" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
-        <div class="form-group mt-3">
-            {{ form.submit(class="btn btn-outline-auxiliary") }}
-        </div>
         <fieldset class="form-group">
             <div class="form-group">
                 {{ form.title.label( class="form-control-label") }}
@@ -20,25 +17,38 @@
                     {{ form.title(class="form-control") }}
                 {% endif %}
                 
-            </div>                  
+            </div>
+            
 
             <div class="form-group">
-                {{ form.body.label( class="form-control-label") }}
-                {% if form.body.errors %}
-                    {{ form.body(class="form-control is-invalid") }}
+                {{ form.link.label( class="form-control-label") }}
+                {% if form.link.errors %}
+                    {{ form.link(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.body.errors %}
+                        {% for error in form.link.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.body(class="form-control") }}
+                    {{ form.link(class="form-control") }}
                 {% endif %}
                 
             </div>
+            <div class="form-group">
+                {{ form.thumbnail.label() }}
+                {{ form.thumbnail(class="form-control-file") }}
+                {% if form.thumbnail.errors %}
+                    {% for error in form.thumbnail.errors %}
+                        <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            
             
         </fieldset>
-        
+        <div class="form-group mt-3">
+            {{ form.submit(class="btn btn-outline-auxiliary") }}
+        </div>
     </form>
 </div>
 {% endblock %}

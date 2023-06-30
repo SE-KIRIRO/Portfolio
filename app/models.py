@@ -264,3 +264,4 @@ class Picture(db.Model):
     picture_file = db.Column(db.String(128), nullable=False)
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
     developer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

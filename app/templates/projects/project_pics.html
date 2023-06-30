@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="icon" href="{{ url_for('static', filename='assets/images/title_icon.jpg')}}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/title_icon.jpg')}}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='assets/vendors/css/glightbox.min.css' )}}">
+    </head>
+    <body>
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                {% for picture in pictures %}
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for picture in pictures %}
+                <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='assets/images/video_thumbnail/' + picture.picture_file) }}" class="d-block w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block">
+                    <p>{{ picture.title }} 
+                        {% if (current_user.is_blogger() or current_user.is_admin()) %}
+                        &#183;
+                        <a href="{{ url_for('projects.delete_project_pic', id=picture.id) }}">
+                            <i class="fa-regular fa-trash-can text-danger" style="font-size: 1.5rem;"></i>
+                        </a>
+                        {% endif %}
+                    </p>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </body>
+</html>
