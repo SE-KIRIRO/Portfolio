@@ -1,10 +1,3 @@
 venv
 .env
 __pycache__
-
-app/decorators.py
-app/email.py
-app/forms.py
-app/models.py
-config.py
-requirements.txt

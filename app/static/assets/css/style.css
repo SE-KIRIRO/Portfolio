@@ -12158,11 +12158,13 @@ textarea.form-control-lg {
   margin-bottom: 1.2rem;
   border-top: 0.5rem solid #7A431D;
   border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .portfolio-box img {
   height: 100%;
   padding: 4rem;
-  margin-left: 2rem;
   align-self: center;
 }
 .portfolio-box .portfolio-info {
